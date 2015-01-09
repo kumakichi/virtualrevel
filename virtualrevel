@@ -1,0 +1,59 @@
+#!/bin/bash
+
+VIRT_PATH=""
+INIT_SCRIPT="activate.sh"
+
+if [ $# -ne 1 ]
+then
+    echo "Usage: $0 virt-path"
+    exit
+fi
+
+VIRT_PATH=$1
+
+if [ -f $VIRT_PATH ]
+then
+    echo "Could not create dir, already exists a file"
+    exit
+fi
+
+if [ -d $VIRT_PATH ]
+then
+    echo "Could not create dir, already exists a dir"
+    exit
+fi
+
+mkdir $VIRT_PATH
+cd $VIRT_PATH
+mkdir src bin pkg
+
+ABS_PATH=$PWD
+
+cat<<EOF > $INIT_SCRIPT
+#!/bin/bash
+
+_OLD_VIRTUAL_PATH=\$GOPATH
+_OLD_VIRTUAL_PS1=\$PS1
+
+cd $ABS_PATH
+export GOPATH=$ABS_PATH:\$GOPATH
+
+export PS1=(`basename $ABS_PATH`)\$PS1
+
+deactivate () {
+    # reset old environment variables
+    if [ -n "\$_OLD_VIRTUAL_PATH" ] ; then
+        GOPATH="\$_OLD_VIRTUAL_PATH"
+        export GOPATH
+        unset _OLD_VIRTUAL_PATH
+    fi
+
+    if [ -n "\$_OLD_VIRTUAL_PS1" ] ; then
+        PS1="\$_OLD_VIRTUAL_PS1"
+        export PS1
+        unset _OLD_VIRTUAL_PS1
+    fi
+}
+EOF
+
+echo "create env succeed, try 'source $ABS_PATH/$INIT_SCRIPT' to start"
