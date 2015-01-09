@@ -1,0 +1,25 @@
+* Usage
+
+  A bash script to create directory for [[https://github.com/revel/revel][revel]] development
+
+  Will not pollute $GOPATH
+
+* How to use
+
+** create
+
+  #+BEGIN_SRC sh
+      $ virtualrevel dst-path
+  #+END_SRC
+
+** start
+
+   #+BEGIN_SRC sh
+     source path-to-virtual-dir/activate.sh
+   #+END_SRC
+
+** stop
+
+   #+BEGIN_SRC sh
+     deactivate
+   #+END_SRC
