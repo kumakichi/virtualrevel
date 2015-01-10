@@ -25,4 +25,4 @@
    #+END_SRC
 * Screenshot
 
-[[https://raw.github.com/kumakichi/virtualrevel/master/screenshot.png.png]]
+[[https://raw.github.com/kumakichi/virtualrevel/master/screenshot.png]]
